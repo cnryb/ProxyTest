@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ProxyTest": {
+      "commandName": "Project",
+      "commandLineArgs": "120.199.224.79:80"
+    }
+  }
+}

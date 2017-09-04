@@ -7,8 +7,10 @@ namespace ProxyTest
 {
     class Program
     {
+
         static void Main(string[] args)
         {
+            MyProxy.proxy = args[0];
             Task.WaitAll(Test());
 
             Console.WriteLine("Hello World!");
@@ -16,7 +18,7 @@ namespace ProxyTest
 
         static async Task Test()
         {
-            HttpWebRequest hwr = WebRequest.CreateHttp("http://1212.ip138.com/ic.asp");
+            HttpWebRequest hwr = WebRequest.CreateHttp("http://ip.chinaz.com/getip.aspx");
             hwr.Proxy = new MyProxy();
             WebResponse wr = await hwr.GetResponseAsync();
             StreamReader sr = new StreamReader(wr.GetResponseStream());
@@ -27,6 +29,7 @@ namespace ProxyTest
 
     public class MyProxy : IWebProxy
     {
+        public static string proxy;
         public ICredentials Credentials { get; set; }
 
         public Uri GetProxy(Uri destination)
@@ -45,7 +48,7 @@ namespace ProxyTest
 8. [无忧代理](http://www.data5u.com/free/index.shtml)
 9. [Proxylist+](https://list.proxylistplus.com)
              * */
-            return new Uri("http://111.23.10.175:80");
+            return new Uri($"http://{proxy}");
         }
 
         public bool IsBypassed(Uri host)
